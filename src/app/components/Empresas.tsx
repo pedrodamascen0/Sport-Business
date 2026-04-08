@@ -5,7 +5,7 @@ import { supabase, Company } from '../../lib/supabase';
 import { useAuth } from '../../contexts/AuthContext';
 import { toast } from 'sonner'
 
-
+s
 
 export function Empresas() {
   const { user } = useAuth();
