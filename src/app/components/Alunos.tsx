@@ -37,17 +37,17 @@ export function Alunos() {
     if (!user) return;
 
     try {
-      const { data, error } = await supabase
-        .from('companies')
-        .select('id, nome_fantasia')
-        .eq('user_id', user.id);
+  const { data, error } = await supabase
+    .from('companies')
+    .select('*');
 
-      if (error) throw error;
-      setCompanies(data || []);
-    } catch (error: any) {
-      console.error('Erro ao carregar empresas:', error);
-    }
-  };
+  if (error) throw error;
+
+  setCompanies(data ?? []);
+} catch (error) {
+  console.error('Erro ao carregar empresas:', error);
+}
+};
 
   const loadStudents = async () => {
     if (!user) return;
@@ -483,4 +483,4 @@ export function Alunos() {
       )}
     </div>
   );
-}
+};
