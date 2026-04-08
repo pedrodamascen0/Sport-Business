@@ -78,3 +78,17 @@ export interface Payment {
   expires_at?: string;
   paid_at?: string;
 }
+
+export interface Employee {
+  id: string;
+  nome: string;
+  email: string;
+  telefone: string;
+  cpf: string;
+  role: "gerente" | "treinador";
+  company_id: string;
+  status: "ativo" | "inativo";
+  salario?: number;
+  data_contratacao: string;
+  created_at: string;
+}

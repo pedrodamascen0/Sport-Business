@@ -81,9 +81,7 @@ export function Dashboard() {
 
   return (
     <div>
-      <div className="mb-8">
-        <h1 className="text-3xl font-bold text-gray-900">Dashboard</h1>
-        <p className="text-gray-600 mt-1">Visão geral do sistema</p>
+      <div className="mb-8">        <h1 className="text-3xl font-bold text-gray-900">Dashboard</h1>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -109,61 +107,71 @@ export function Dashboard() {
       </div>
 
       <div className="mt-8 grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-          <h2 className="text-xl font-bold text-gray-900 mb-4">Bem-vindo!</h2>
-          <p className="text-gray-600 mb-4">
-            Sistema de gestão completo para academias e assessorias esportivas.
-          </p>
-          <ul className="space-y-2 text-gray-600">
-            <li className="flex items-center">
-              <span className="w-2 h-2 bg-indigo-600 rounded-full mr-2" />
-              Cadastre empresas e configure dados bancários
-            </li>
-            <li className="flex items-center">
-              <span className="w-2 h-2 bg-indigo-600 rounded-full mr-2" />
-              Gerencie alunos e clientes
-            </li>
-            <li className="flex items-center">
-              <span className="w-2 h-2 bg-indigo-600 rounded-full mr-2" />
-              Crie e atribua planilhas de treino
-            </li>
-            <li className="flex items-center">
-              <span className="w-2 h-2 bg-indigo-600 rounded-full mr-2" />
-              Receba pagamentos via QR Code
-            </li>
-          </ul>
-        </div>
+          {/* Painel de boas-vindas */}
+          <div className="bg-white rounded-2xl shadow-lg border border-gray-100 p-8 transition hover:shadow-xl hover:border-indigo-200">
+            <h2 className="text-3xl font-extrabold text-indigo-700 mb-4">Bem-vindo!</h2>
+            <p className="text-gray-600 mb-6 leading-relaxed">
+              Sistema de gestão completo para academias e assessorias esportivas.
+            </p>
+            <ul className="space-y-4 text-gray-700">
+              {[
+                'Cadastre empresas e configure dados bancários',
+                'Gerencie alunos e clientes',
+                'Crie e atribua planilhas de treino',
+                'Receba pagamentos via QR Code',
+              ].map((item, index) => (
+                <li
+                  key={index}
+                  className="flex items-center bg-gray-50 rounded-lg p-3 shadow-sm hover:bg-indigo-50 transition"
+                >
+                  <span className="w-3 h-3 bg-indigo-600 rounded-full mr-3 shadow-sm" />
+                  <span className="font-medium">{item}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
 
-        <div className="bg-gradient-to-br from-indigo-500 to-purple-600 rounded-xl shadow-sm p-6 text-black">
-          <h2 className="text-xl font-bold mb-4">Ações Rápidas</h2>
-          <div className="space-y-3">
-            <button
-              type="button"
-              onClick={handleQuickActionClick('/empresas')}
-              className="w-full text-left bg-indigo-950 text-white rounded-lg p-4 transition shadow-sm hover:bg-indigo-900 active:scale-[0.98] focus:outline-none focus:ring-2 focus:ring-indigo-400"
-            >
-              <p className="font-medium">Cadastrar Empresa</p>
-              <p className="text-sm opacity-90">Adicione uma nova empresa ao sistema</p>
-            </button>
-            <button
-              type="button"
-              onClick={handleQuickActionClick('/alunos')}
-              className="w-full text-left bg-indigo-950 text-white rounded-lg p-4 transition shadow-sm hover:bg-indigo-900 active:scale-[0.98] focus:outline-none focus:ring-2 focus:ring-indigo-400"
-            >
-              <p className="font-medium">Cadastrar Aluno</p>
-              <p className="text-sm opacity-90">Registre um novo aluno ou cliente</p>
-            </button>
-            <button
-              type="button"
-              onClick={handleQuickActionClick('/treinos')}
-              className="w-full text-left bg-indigo-950 text-white rounded-lg p-4 transition shadow-sm hover:bg-indigo-900 active:scale-[0.98] focus:outline-none focus:ring-2 focus:ring-indigo-400"
-            >
-              <p className="font-medium">Criar Treino</p>
-              <p className="text-sm opacity-90">Monte uma nova planilha de treino</p>
-            </button>
+          {/* Painel de ações rápidas */}
+          <div className="bg-gradient-to-br from-indigo-500 to-purple-600 rounded-2xl shadow-lg p-8 text-white">
+            <h2 className="text-2xl font-bold mb-5">Ações Rápidas</h2>
+            <div className="space-y-4">
+              {[
+                {
+                  title: 'Cadastrar Empresa',
+                  desc: 'Adicione uma nova empresa ao sistema',
+                  path: '/empresas',
+                  icon: '🏢',
+                },
+                {
+                  title: 'Cadastrar Aluno',
+                  desc: 'Registre um novo aluno ou cliente',
+                  path: '/alunos',
+                  icon: '👤',
+                },
+                {
+                  title: 'Criar Treino',
+                  desc: 'Monte uma nova planilha de treino',
+                  path: '/treinos',
+                  icon: '💪',
+                },
+              ].map((action, index) => (
+                <button
+                  key={index}
+                  type="button"
+                  onClick={handleQuickActionClick(action.path)}
+                  className="w-full flex items-center gap-3 text-left bg-indigo-950 rounded-xl p-5 transition shadow-md hover:bg-indigo-900 active:scale-[0.98] focus:outline-none focus:ring-2 focus:ring-indigo-400"
+                >
+                  <span className="text-2xl">{action.icon}</span>
+                  <div>
+                    <p className="font-semibold">{action.title}</p>
+                    <p className="text-sm opacity-90">{action.desc}</p>
+                  </div>
+                </button>
+              ))}
+            </div>
           </div>
         </div>
       </div>
-    </div>
+  
   );
 }

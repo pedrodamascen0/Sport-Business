@@ -5,6 +5,7 @@ import { Login } from './components/Login';
 import { Layout } from './components/Layout';
 import { Dashboard } from './components/Dashboard';
 import { Empresas } from './components/Empresas';
+import { Funcionarios } from './components/Funcionarios';
 import { Alunos } from './components/Alunos';
 import { Treinos } from './components/Treinos';
 import { Pagamentos } from './components/Pagamentos';
@@ -82,6 +83,16 @@ function AppRoutes() {
           <ProtectedRoute>
             <Layout>
               <Empresas />
+            </Layout>
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/funcionarios"
+        element={
+          <ProtectedRoute>
+            <Layout>
+              <Funcionarios />
             </Layout>
           </ProtectedRoute>
         }
