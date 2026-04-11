@@ -9,6 +9,8 @@ import { Funcionarios } from './components/Funcionarios';
 import { Alunos } from './components/Alunos';
 import { Treinos } from './components/Treinos';
 import { Pagamentos } from './components/Pagamentos';
+import { useState } from 'react';
+import { GuidedTour } from './components/GuidedTour';// Importe o componente que criamos
 
 function ProtectedRoute({ children }: { children: React.ReactNode }) {
   const { user, loading } = useAuth();
@@ -141,3 +143,76 @@ export default function App() {
     </BrowserRouter>
   );
 }
+
+
+
+
+// 1. Defina os passos do seu tour
+const tourSteps = [
+  {
+    targetId: 'logo-principal', // ID do elemento no HTML
+    title: 'Bem-vindo ao Dashboard!',
+    content: 'Este é o seu ponto de partida. Aqui você vê o resumo de tudo.',
+  },
+  {
+    targetId: 'input-busca',
+    title: 'Busca Rápida',
+    content: 'Precisa encontrar algo? Digite aqui para buscar clientes ou produtos instantaneamente.',
+  },
+  {
+    targetId: 'btn-novo-registro',
+    title: 'Crie um Novo Registro',
+    content: 'Clique aqui para adicionar um novo cliente ou venda ao sistema.',
+  },
+];
+
+export function DisplayTour() {
+  // 2. Estado para controlar se o tour está ativo
+  const [isTourActive, setIsTourActive] = useState(true); // Começa ativo para teste
+
+  const handleTourComplete = () => {
+    setIsTourActive(false);
+    // Opcional: Salvar no localStorage que o usuário já viu o tour
+    localStorage.setItem('hasSeenTour', 'true');
+    console.log("Tour finalizado pelo usuário.");
+  };
+
+  return (
+    <div className="min-h-screen bg-slate-50 p-8">
+      {/* 3. Renderize o componente do Tour */}
+      <GuidedTour 
+        steps={tourSteps} 
+        active={isTourActive} 
+        onComplete={handleTourComplete}
+      />
+
+      {/* 4. Elementos da sua página com IDs correspondentes */}
+      <header className="flex items-center justify-between pb-8 border-b border-slate-200">
+        <h1 id="logo-principal" className="text-3xl font-bold text-slate-900">
+          My App Pro
+        </h1>
+        <div className="flex gap-4">
+          <input 
+            id="input-busca"
+            type="search" 
+            placeholder="Buscar..." 
+            className="rounded-lg border border-slate-300 px-4 py-2 w-64"
+          />
+          <button 
+            id="btn-novo-registro"
+            className="rounded-lg bg-slate-900 px-5 py-2 text-white hover:bg-slate-800"
+          >
+            + Novo
+          </button>
+        </div>
+      </header>
+
+      <main className="mt-12">
+        <p className="text-slate-600">Conteúdo principal do seu dashboard...</p>
+        {/* ... resto do seu site ... */}
+      </main>
+    </div>
+  );
+}
+
+
